@@ -3,6 +3,7 @@
 const BaseSvgService = require('../base-svg-scraping')
 const { NotFound } = require('../errors')
 const { fetch, render } = require('./azure-devops-helpers')
+const { baseUrl } = require('../../lib/constants')
 
 const documentation = `
 <p>
@@ -24,11 +25,11 @@ const documentation = `
   alt="PROJECT_ID is in the id property of the API response." />
 <p>
   Your badge will then have the form:
-  <code>https://img.shields.io/vso/build/ORGANIZATION/PROJECT_ID/DEFINITION_ID.svg</code>.
+  <code>${baseUrl}/vso/build/ORGANIZATION/PROJECT_ID/DEFINITION_ID.svg</code>.
 </p>
 <p>
   Optionally, you can specify a named branch:
-  <code>https://img.shields.io/vso/build/ORGANIZATION/PROJECT_ID/DEFINITION_ID/NAMED_BRANCH.svg</code>.
+  <code>${baseUrl}/vso/build/ORGANIZATION/PROJECT_ID/DEFINITION_ID/NAMED_BRANCH.svg</code>.
 </p>
 `
 

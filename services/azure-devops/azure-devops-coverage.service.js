@@ -4,6 +4,7 @@ const Joi = require('joi')
 const BaseJsonService = require('../base-json')
 const { NotFound } = require('../errors')
 const { getHeaders } = require('./azure-devops-helpers')
+const { baseUrl } = require('../../lib/constants')
 
 const documentation = `
 <p>
@@ -18,11 +19,11 @@ const documentation = `
   alt="ORGANIZATION is after the dev.azure.com part, PROJECT is right after that, DEFINITION_ID is at the end after the id= part." />
 <p>
   Your badge will then have the form:
-  <code>https://img.shields.io/azure-devops/coverage/ORGANIZATION/PROJECT/DEFINITION_ID.svg</code>.
+  <code>${baseUrl}/azure-devops/coverage/ORGANIZATION/PROJECT/DEFINITION_ID.svg</code>.
 </p>
 <p>
   Optionally, you can specify a named branch:
-  <code>https://img.shields.io/azure-devops/coverage/ORGANIZATION/PROJECT/DEFINITION_ID/NAMED_BRANCH.svg</code>.
+  <code>${baseUrl}/azure-devops/coverage/ORGANIZATION/PROJECT/DEFINITION_ID/NAMED_BRANCH.svg</code>.
 </p>
 `
 const {

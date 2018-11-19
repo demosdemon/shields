@@ -2,6 +2,7 @@
 
 const BaseSvgService = require('../base-svg-scraping')
 const { fetch, render } = require('./azure-devops-helpers')
+const { baseUrl } = require('../../lib/constants')
 
 const documentation = `
 <p>
@@ -17,7 +18,7 @@ const documentation = `
   alt="ORGANIZATION is after the dev.azure.com part, PROJECT_ID is after the badge part, DEFINITION_ID and ENVIRONMENT_ID are right after that." />
 <p>
   Your badge will then have the form:
-  <code>https://img.shields.io/vso/release/ORGANIZATION/PROJECT_ID/DEFINITION_ID/ENVIRONMENT_ID.svg</code>.
+  <code>${baseUrl}/vso/release/ORGANIZATION/PROJECT_ID/DEFINITION_ID/ENVIRONMENT_ID.svg</code>.
 </p>
 `
 

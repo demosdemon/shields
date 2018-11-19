@@ -7,6 +7,11 @@ const xpath = require('xpath')
 const yaml = require('js-yaml')
 const Raven = require('raven')
 
+const psh = require('./lib/platformsh')
+if (psh.config) {
+  psh.applyPlatformEnvironment(psh.config)
+}
+
 const serverSecrets = require('./lib/server-secrets')
 Raven.config(process.env.SENTRY_DSN || serverSecrets.sentry_dsn).install()
 Raven.disableConsoleAlerts()

@@ -6,13 +6,14 @@ const {
   setBadgeColor,
 } = require('../../lib/badge-data')
 const { escapeFormatSlashes } = require('../../lib/path-helpers')
+const { baseUrl } = require('../../lib/constants')
 
 const documentation = `
 <p>
   The badge is of the form
-  <code>https://img.shields.io/website[OPTIONS]/PROTOCOL/URLREST.svg</code>,
+  <code>${baseUrl}/website[OPTIONS]/PROTOCOL/URLREST.svg</code>,
   the simplest case being
-  <code>https://img.shields.io/website/http/example.com.svg</code>.
+  <code>${baseUrl}/website/http/example.com.svg</code>.
   More options are described below.
 </p>
 <p>
@@ -23,7 +24,7 @@ const documentation = `
 <p>
   The existence of a specific path on the server can be checked by appending
   a path after the domain name, e.g.
-  <code>https://img.shields.io/website/http/www.website.com/path/to/page.html.svg</code>.
+  <code>${baseUrl}/website/http/www.website.com/path/to/page.html.svg</code>.
 </p>
 <p>
   The URLREST should be URLEncoded:

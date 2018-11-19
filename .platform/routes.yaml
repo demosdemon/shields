@@ -1,0 +1,13 @@
+http://{default}/:
+  type: redirect
+  to: https://{default}/
+
+https://{default}/:
+  type: upstream
+  upstream: shields:http
+
+https://{default}/sys/logs:
+  type: upstream
+  upstream: shields:http
+  cache:
+    enabled: false

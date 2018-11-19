@@ -1,0 +1,24 @@
+name: shields
+type: nodejs:10
+disk: 256
+
+hooks:
+  build: |
+    set -ex
+    npm install
+    BASE_URL=https://shields.guid.cc LONG_CACHE=true npm run build
+    npm prune --production
+    npm cache clean --force
+
+web:
+  commands:
+    start: NODE_ENV=production node server
+  locations:
+    /:
+      passthru: true
+      allow: true
+      root: public
+      expires: 1h
+
+relationships:
+  redis: redis:redis

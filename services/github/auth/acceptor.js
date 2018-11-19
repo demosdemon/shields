@@ -6,6 +6,7 @@ const log = require('../../../lib/log')
 const githubAuth = require('../../../lib/github-auth')
 const serverSecrets = require('../../../lib/server-secrets')
 const secretIsValid = require('../../../lib/sys/secret-is-valid')
+const { baseUrl } = require('../../../lib/constants')
 
 function sendTokenToAllServers(token) {
   const { shieldsIps, shieldsSecret } = serverSecrets
@@ -43,8 +44,6 @@ function sendTokenToAllServers(token) {
 }
 
 function setRoutes(server) {
-  const baseUrl = process.env.BASE_URL || 'https://img.shields.io'
-
   server.route(/^\/github-auth$/, (data, match, end, ask) => {
     ask.res.statusCode = 302 // Found.
     const query = queryString.stringify({
