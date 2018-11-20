@@ -21,4 +21,4 @@ web:
       expires: 1h
 
 relationships:
-  redis: redis:redis
+  rediscache: persistent-redis:redis
