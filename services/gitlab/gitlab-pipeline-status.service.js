@@ -112,8 +112,10 @@ module.exports = class GitlabPipelineStatus extends BaseSvgScrapingService {
     }
 
     if (token) {
-      request.options.headers = {
-        'Private-Token': token,
+      request.options = {
+        headers: {
+          'Private-Token': token,
+        },
       }
     }
 
