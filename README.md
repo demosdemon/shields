@@ -25,6 +25,9 @@
     <a href="https://discord.gg/HjJCwm5">
         <img src="https://img.shields.io/discord/308323056592486420.svg?logo=discord"
             alt="chat on Discord"></a>
+    <a href="https://github.com/demosdemon/shields">
+        <img src="https://shields.guid.cc/badge/platform-e7zbienieag5q-16A9E1.svg?logo=platformsh"
+            alt="Shields.io on Platform.sh"></a>
     <a href="https://twitter.com/intent/follow?screen_name=shields_io">
         <img src="https://img.shields.io/twitter/follow/shields_io.svg?style=social&logo=twitter"
             alt="follow on Twitter"></a>
