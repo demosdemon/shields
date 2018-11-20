@@ -4,7 +4,11 @@ const Joi = require('joi')
 const validate = require('../../lib/validate')
 const BaseSvgScrapingService = require('../base-svg-scraping')
 const { InvalidParameter, NotFound } = require('../errors')
-const { isPipelineStatus } = require('./gitlab-helpers')
+const {
+  isPipelineStatus,
+  gitlabBaseUrl,
+  gitlabAccessToken,
+} = require('./gitlab-helpers')
 
 const badgeSchema = Joi.object({
   message: Joi.alternatives()
@@ -16,6 +20,7 @@ const queryParamsSchema = Joi.object({
   // TODO This accepts URLs with query strings and fragments, which should be
   // rejected.
   gitlab_url: Joi.string().uri({ scheme: ['https'] }),
+  gitlab_token: Joi.string(),
 }).required()
 
 module.exports = class GitlabPipelineStatus extends BaseSvgScrapingService {
@@ -94,15 +99,25 @@ module.exports = class GitlabPipelineStatus extends BaseSvgScrapingService {
 
   async handle({ user, repo, branch = 'master' }, queryParams) {
     const {
-      gitlab_url: baseUrl = 'https://gitlab.com',
+      gitlab_url: baseUrl = gitlabBaseUrl,
+      gitlab_token: token = gitlabAccessToken,
     } = this.constructor.validateQueryParams(queryParams)
-    const { message: status } = await this._requestSvg({
+
+    const request = {
       schema: badgeSchema,
       url: `${baseUrl}/${user}/${repo}/badges/${branch}/pipeline.svg`,
       errorMessages: {
-        401: 'repo not found',
+        401: 'permission denied, please supply a gitlab_token',
       },
-    })
+    }
+
+    if (token) {
+      request.options.headers = {
+        'Private-Token': token,
+      }
+    }
+
+    const { message: status } = await this._requestSvg(request)
     if (status === 'unknown') {
       throw new NotFound({ prettyMessage: 'branch not found' })
     }
