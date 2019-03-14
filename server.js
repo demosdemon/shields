@@ -54,13 +54,19 @@ const githubConstellation = new GithubConstellation({
 const metrics = new PrometheusMetrics(config.metrics.prometheus)
 const { apiProvider: githubApiProvider } = githubConstellation
 
+const RedisTokenCache = require('./services/platformsh/redis-token-cache')
+const tokenCache = new RedisTokenCache({
+  url: config.persistence.redisUrl,
+  prefix: 'platformsh:',
+})
+
 function reset() {
   clearRequestCache()
   clearRegularUpdateCache()
 }
 
 async function stop() {
-  await githubConstellation.stop()
+  await Promise.all(githubConstellation.stop(), tokenCache.stop())
   analytics.cancelAutosaving()
   return new Promise(resolve => {
     camp.close(resolve)
@@ -111,6 +117,7 @@ loadServiceClasses().forEach(serviceClass =>
     {
       handleInternalErrors: config.handleInternalErrors,
       profiling: config.profiling,
+      tokenCache,
     }
   )
 )

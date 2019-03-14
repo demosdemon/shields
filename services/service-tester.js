@@ -11,10 +11,11 @@ const trace = require('./trace')
  */
 class ServiceTester {
   /**
-   * @param attrs { id, title, pathPrefix } The `id` is used to specify which
-   *   tests to run from the CLI or pull requests. The `title` prints in the
-   *   Mocha output. The `path` is the path prefix which is automatically
-   *   prepended to each tested URI. The default is `/${attrs.id}`.
+   * @param attrs {{id: string, title: string, pathPrefix: string}} The `id` is
+   *   used to specify which tests to run from the CLI or pull requests. The
+   *   `title` prints in the Mocha output. The `path` is the path prefix which
+   *   is automatically prepended to each tested URI. The default is
+   *   `/${attrs.id}`.
    */
   constructor({ id, title, pathPrefix }) {
     if (pathPrefix === undefined) {

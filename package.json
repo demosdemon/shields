@@ -58,6 +58,7 @@
     "xpath": "~0.0.27"
   },
   "scripts": {
+    "build-docs": "jsdoc --access all --recurse --destination docs lib services scripts",
     "coverage:test:frontend": "NODE_ENV=mocha nyc node_modules/mocha/bin/_mocha --require @babel/polyfill --require @babel/register \"frontend/**/*.spec.js\"",
     "coverage:test:server": "HANDLE_INTERNAL_ERRORS=false nyc node_modules/mocha/bin/_mocha \"*.spec.js\" \"lib/**/*.spec.js\" \"services/**/*.spec.js\"",
     "coverage:test:package": "nyc node_modules/mocha/bin/_mocha \"gh-badges/**/*.spec.js\"",
@@ -144,6 +145,7 @@
     "is-png": "^1.1.0",
     "is-svg": "^3.0.0",
     "joi-extension-semver": "2.0.0",
+    "jsdoc": "^3.5.5",
     "lint-staged": "^8.0.5",
     "lodash.debounce": "^4.0.8",
     "lodash.difference": "^4.5.0",
